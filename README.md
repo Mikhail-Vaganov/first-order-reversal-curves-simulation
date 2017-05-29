@@ -12,3 +12,7 @@ forc.magnetization_forc()
 forc.calculate_forc_distribution()
 forc.draw_forc_diagram_hc_hu()
 ```
+
+## References
+1. Pike, Roberts, Verosub, JAP 1999
+2. [Vaganov, Linke, Odenbach, Raikher, JMMM 2015](http://www.sciencedirect.com/science/article/pii/S0304885316319552)
