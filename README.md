@@ -7,10 +7,17 @@ For example, in order to simulate a single particle model use an instance of the
 ```python
 h = Hysteron(2.0, -2.0)
 matter = SingleParticleMatter(h)
-forc = PikeFORC(3, -1, 1, matter, outputDirectory)
+forc = PikeFORC(3, -1, 1, matter, output_directory)
 forc.magnetization_forc()
 forc.calculate_forc_distribution()
 forc.draw_forc_diagram_hc_hu()
+```
+
+## Stoner-Wohlfarth model simulation
+
+```python
+p = SwParticle(np.pi/3)
+p.draw(output_directory)
 ```
 
 ## References
