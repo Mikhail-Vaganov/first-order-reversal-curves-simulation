@@ -5,13 +5,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/ExperimentProcessor" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Particle" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Sandbox" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Sandbox/Hysteron" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Matter" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Sandbox/AbstractTwoBranchesParticle" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Experiment" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Sandbox/SwParticle" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Sandbox/MagnetizationCurve" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
