@@ -1,8 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import os
-import pylab  # pylab package is a wrapper package that imports numpy, scipy, and matplotlib
-
 from MagneticParticle import MagneticParticle
 
 
@@ -50,11 +47,10 @@ class Hysteron(MagneticParticle):
         plt.xlabel('h(t)')
         plt.ylabel('m(h)')
         plt.xlim([np.amin(input), np.amax(input)])
-        plt.show()
 
-        folderForThisClass = os.path.join(directory, __name__)
-        if not os.path.exists(folderForThisClass):
-            os.makedirs(folderForThisClass)
+        self.save_current_plot(directory=directory)
+
+        plt.show()
 
     def prepare_particle(self, neg_to_pos, pos_to_neg):
         pass

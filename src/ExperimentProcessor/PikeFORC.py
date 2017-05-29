@@ -1,10 +1,7 @@
-import itertools
-import numpy as np
-import matplotlib.pyplot as plt
-import os
 import datetime
-from mpl_toolkits.mplot3d import Axes3D
-
+import os
+import matplotlib.pyplot as plt
+import numpy as np
 from MagneticMatter import MagneticMatter
 
 
