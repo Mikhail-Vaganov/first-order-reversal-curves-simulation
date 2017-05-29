@@ -1,0 +1,4 @@
+## Ignore files containing simulation results
+/Sandbox
+**/.idea/workspace.xml 
+**/.idea/tasks.xml
