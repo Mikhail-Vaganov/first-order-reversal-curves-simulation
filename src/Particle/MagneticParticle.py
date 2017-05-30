@@ -21,14 +21,19 @@ class MagneticParticle:
         pass
 
     def draw(self, directory: str) -> None:
+        self._prepare_plot()
+        self.save_current_plot(directory)
+        plt.show()
+
+    def _prepare_plot(self) -> None:
         pass
 
     def prepare_particle(self, neg_to_pos, pos_to_neg) -> None:
         pass
 
     def save_current_plot(self, directory):
-        folderForThisClass = os.path.join(directory, self.__class__. __name__)
-        if not os.path.exists(folderForThisClass):
-            os.makedirs(folderForThisClass)
+        folder_for_this_class = os.path.join(directory, self.__class__. __name__)
+        if not os.path.exists(folder_for_this_class):
+            os.makedirs(folder_for_this_class)
 
-        plt.savefig(os.path.join(folderForThisClass, datetime.datetime.now().strftime("%H_%M_%S") + '.jpg'))
+        plt.savefig(os.path.join(folder_for_this_class, datetime.datetime.now().strftime("%H_%M_%S") + '.jpg'))

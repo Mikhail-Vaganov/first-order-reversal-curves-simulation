@@ -33,7 +33,7 @@ class Hysteron(MagneticParticle):
         if field_value < self.beta:
             self.magnetization = -1
 
-    def draw(self, directory: str):
+    def _prepare_plot(self):
         t = np.arange(0, 2 * np.pi, 0.01)
         input = -(self.alpha - self.beta) * np.cos(t) + (self.alpha + self.beta) / 2
         output = np.zeros(len(t))
@@ -47,10 +47,6 @@ class Hysteron(MagneticParticle):
         plt.xlabel('h(t)')
         plt.ylabel('m(h)')
         plt.xlim([np.amin(input), np.amax(input)])
-
-        self.save_current_plot(directory=directory)
-
-        plt.show()
 
     def prepare_particle(self, neg_to_pos, pos_to_neg):
         pass

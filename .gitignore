@@ -1,6 +1,5 @@
 ## Ignore files containing simulation results
 /Sandbox/**
-/Experimental data/**
 
 # Workspace data
 **/.idea/workspace.xml 
