@@ -3,6 +3,7 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 from MagneticMatter import MagneticMatter
+from mpl_toolkits.mplot3d import Axes3D
 
 
 class PikeFORC:
@@ -124,7 +125,7 @@ class PikeFORC:
 
     def draw_magnetization_forc(self):
         fig = plt.figure()
-        ax = fig.gca(projection='3d')
+        ax = fig.add_subplot(111, projection='3d')
         ax.plot_surface(self.Hgrid, self.Hrgrid, self.Mgrid)
         plt.show()
 
@@ -164,4 +165,18 @@ class PikeFORC:
             os.makedirs(folder_for_forc_hc_hu_diagram)
 
         plt.savefig(os.path.join(folder_for_forc_hc_hu_diagram, datetime.datetime.now().strftime("%H_%M_%S") + '.jpg'))
+        plt.show()
+
+    def draw_forcs(self):
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+
+        for i in range(len(self.Hr)):
+            for j in range(len(self.H)):
+                if self.H[j]>=self.Hr[i]:
+                    ax.plot(self.H[j : ], self.Mgrid[i,j:], 'b')
+
+        ax.set_title("First order reversal curves")
+        ax.set_xlabel('H')
+        ax.set_ylabel('M')
         plt.show()
