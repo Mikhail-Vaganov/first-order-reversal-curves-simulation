@@ -21,5 +21,6 @@ p.draw(output_directory)
 ```
 
 ## References
-1. Pike, Roberts, Verosub, JAP 1999
-2. [Vaganov, Linke, Odenbach, Raikher, JMMM 2015](http://www.sciencedirect.com/science/article/pii/S0304885316319552)
+1. [C.R. Pike, A.R. Roberts, K.L. Verosub, JAP **85** (1999), 6660-6666](http://dx.doi.org/10.1063/1.370176)
+2. [M.V. Vaganov, J. Linke, S. Odenbach, Yu.L. Raikher, JMMM **431** (2015), 130-133](http://www.sciencedirect.com/science/article/pii/S0304885316319552)
+3. [A.M. Biller, O.V. Stolbov, Yu.L. Raikher, Phys. Rev. E **92** (2015), 023202](https://doi.org/10.1103/PhysRevE.92.023202)
