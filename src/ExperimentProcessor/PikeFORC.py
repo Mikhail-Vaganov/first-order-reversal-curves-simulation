@@ -134,6 +134,8 @@ class PikeFORC:
 
         max_z = np.nanmax(np.nanmax(self.PgridHcHu))
 
+        plt.grid(which='both')
+
         if self.maxHc > 1e3:
             plt.contourf(self.Hcgrid / 1e3, self.Hugrid / 1e3, self.PgridHcHu / 1e3, n_contour,
                          cmap=plt.get_cmap('seismic'), vmin=-max_z, vmax=max_z)
@@ -173,10 +175,11 @@ class PikeFORC:
 
         for i in range(len(self.Hr)):
             for j in range(len(self.H)):
-                if self.H[j]>=self.Hr[i]:
-                    ax.plot(self.H[j : ], self.Mgrid[i,j:], 'b')
+                if self.H[j] >= self.Hr[i]:
+                    ax.plot(self.H[j:], self.Mgrid[i, j:], 'b')
 
         ax.set_title("First order reversal curves")
         ax.set_xlabel('H')
         ax.set_ylabel('M')
+        ax.grid(which='both')
         plt.show()

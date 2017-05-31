@@ -8,8 +8,8 @@ from MagneticParticle import MagneticParticle
 class ManyParticlesMatter(MagneticMatter):
     def __init__(self, particles):
         super().__init__()
-        self.positive_saturation_field = -1
-        self.negative_saturation_field = 1
+        self.positive_saturation_field = -1.0
+        self.negative_saturation_field = 1.0
         self.particles = particles
         for i in range(len(particles)):
             if self.positive_saturation_field < particles[i].positive_saturation_field:
@@ -23,21 +23,21 @@ class ManyParticlesMatter(MagneticMatter):
         self.magnetization /= len(particles)
 
     def magnetize(self, field):
-        self.magnetization = 0
+        self.magnetization = 0.0
         for i in range(len(self.particles)):
             self.particles[i].apply_field(field)
             self.magnetization += self.particles[i].magnetization
         self.magnetization /= len(self.particles)
 
     def saturate_to_positive(self):
-        self.magnetization = 0
+        self.magnetization = 0.0
         for i in range(len(self.particles)):
             self.particles[i].set_up()
             self.magnetization += self.particles[i].magnetization
         self.magnetization /= len(self.particles)
 
     def saturate_to_negative(self):
-        self.magnetization = 0
+        self.magnetization = 0.0
         for i in range(len(self.particles)):
             self.particles[i].set_down()
             self.magnetization += self.particles[i].magnetization
@@ -47,25 +47,18 @@ class ManyParticlesMatter(MagneticMatter):
         hmax = self.positive_saturation_field
         hstep = 0.01
         field = np.concatenate(
-            (np.arange(0, hmax, hstep), np.arange(hmax, -hmax, -hstep), np.arange(-hmax, hmax + hstep, hstep)))
-        magnetization = np.zeros((len(field), 1))
+            (np.arange(0.0, hmax, hstep), np.arange(hmax, -hmax, -hstep), np.arange(-hmax, hmax + hstep, hstep)))
+        magnetization = np.zeros((len(field), 1), dtype=float)
         for i in range(len(field)):
             self.magnetize(field[i])
             magnetization[i] = self.magnetization
 
         fig = plt.figure()
         ax = fig.add_subplot(111)
-        ax.set_title("M-H of multiparticle matter (n=" + str(len(self.particles)))
-
-        if np.max(field) < 1000:
-            ax.plot(field, magnetization)
-            ax.set_xlabel("H, A/m")
-            ax.set_xlabel("M, A/m")
-        elif np.max(field) < 1e6:
-            ax.plot(field / 1e3, magnetization / 1e3)
-            ax.set_xlabel("H, kA/m")
-            ax.set_xlabel("M, kA/m")
-        else:
-            ax.plot(field / 1e6, magnetization / 1e6)
-            ax.set_xlabel("H, MA/m")
-            ax.set_xlabel("M, MA/m")
+        ax.plot(field, magnetization)
+        ax.set_xlabel("h")
+        ax.set_ylabel("m")
+        ax.set_title("m(h) of multiparticle matter (n=" + str(len(self.particles)) + ")")
+        ax.grid(which='both')
+        ax.set_aspect('equal')
+        plt.show()

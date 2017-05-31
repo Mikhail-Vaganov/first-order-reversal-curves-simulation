@@ -1,8 +1,8 @@
 class MagneticMatter:
     def __init__(self):
-        self.magnetization = 0
-        self.positive_saturation_field = 0
-        self.negative_saturation_field = 0
+        self.magnetization = 0.0
+        self.positive_saturation_field = 0.0
+        self.negative_saturation_field = 0.0
 
     def magnetize(self, field) -> None:
         pass

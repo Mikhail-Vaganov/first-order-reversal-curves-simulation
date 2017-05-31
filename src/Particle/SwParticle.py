@@ -1,7 +1,9 @@
 from MagneticParticle import MagneticParticle
 import numpy as np
+from scipy.optimize import minimize_scalar
 from scipy.optimize import minimize
 import matplotlib.pyplot as plt
+from scipy.signal import argrelmin
 
 
 class SwParticle(MagneticParticle):
@@ -9,9 +11,14 @@ class SwParticle(MagneticParticle):
 
     def __init__(self, psi_in_radians: float):
         super().__init__()
-        self.psi = np.mod(np.abs(psi_in_radians), np.pi)
+
+        if (np.abs(psi_in_radians) / np.pi) % 2 ==1:
+            self.psi = np.pi
+        else:
+            self.psi = np.mod(np.abs(psi_in_radians), np.pi)
+
         self.last_phi = psi_in_radians
-        self.last_branch = 1
+        self.last_branch = 1 if psi_in_radians<=np.pi/2 else -1
         self.last_applied_field = 0
         self.magnetization = np.cos(psi_in_radians)
 
@@ -48,10 +55,13 @@ class SwParticle(MagneticParticle):
                 x = np.arange(0, np.pi, 0.001)
 
         energy = lambda phi: 0.5 * np.sin(self.psi - phi) ** 2 - h * np.cos(phi)
-        result = minimize(energy, np.array([self.last_phi]), method='Nelder-Mead', tol=1e-8)
 
-        self.last_phi = result.x/np.abs(result.x)*np.mod(np.abs(result.x), 2*np.pi)
-        return np.cos(result.x)
+        indices = argrelmin(energy(x))
+
+        if len(indices[0])==0:
+            return self.last_branch
+        else:
+            return np.cos(x[indices[0][0]])
 
     def _prepare_plot(self):
         hmax = self.positive_saturation_field
@@ -96,15 +106,15 @@ class SwParticle(MagneticParticle):
         max_magn = 1.0
         max_field = 2.0
 
-        stepy = np.abs(max_magn/10)
-        zero_yy = np.arange(-max_magn-stepy,max_magn+2*stepy, stepy )
+        stepy = np.abs(max_magn / 10)
+        zero_yy = np.arange(-max_magn - stepy, max_magn + 2 * stepy, stepy)
         zero_yx = np.zeros((len(zero_yy), 1))
 
         stepx = np.abs(max_field / 10)
-        zero_xx = np.arange(-max_field-stepx,max_field+2*stepx, stepx )
+        zero_xx = np.arange(-max_field - stepx, max_field + 2 * stepx, stepx)
         zero_xy = np.zeros((len(zero_xx), 1))
 
-        ax.plot(zero_yx, zero_yy, '--k', zero_xx, zero_xy, '--k');
+        ax.plot(zero_yx, zero_yy, '--k', zero_xx, zero_xy, '--k')
         ax.set_ylim(np.min(zero_yy), np.max(zero_yy))
         ax.set_xlim(np.min(zero_xx), np.max(zero_xx))
 
@@ -114,6 +124,6 @@ class SwParticle(MagneticParticle):
         theta = np.arange(-np.pi, np.pi, 0.0001)
         x = np.cos(theta) ** 3
         y = np.sin(theta) ** 3
-        ax.plot(x, y);
+        ax.plot(x, y)
         ax.grid(which='both')
         plt.show()
