@@ -36,4 +36,4 @@ class MagneticParticle:
         if not os.path.exists(folder_for_this_class):
             os.makedirs(folder_for_this_class)
 
-        plt.savefig(os.path.join(folder_for_this_class, datetime.datetime.now().strftime("%H_%M_%S") + '.jpg'))
+        plt.savefig(os.path.join(folder_for_this_class, datetime.datetime.now().strftime("%H_%M_%S") + '.png'))
