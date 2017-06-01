@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from MagneticMatter import MagneticMatter
 from mpl_toolkits.mplot3d import Axes3D
+import scipy.io
+import io
 
 
 class PikeFORC:
@@ -183,3 +185,8 @@ class PikeFORC:
         ax.set_ylabel('M')
         ax.grid(which='both')
         plt.show()
+
+    def save_data_to_file(self):
+        data_to_save = {}
+        data_to_save['P'] = self.PgridHcHu
+        scipy.io.savemat((os.path.join(self.FolderForResults_common, "forc_diagram_data.txt", data_to_save)))
